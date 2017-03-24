@@ -14,11 +14,8 @@ function rotation(dimension, d1, d2: number, angle: number): mathjs.Matrix {
 let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1);
 let rot: mathjs.Matrix = math.eye(mainPolytope.dimension);
 
-let start: number = Date.now();
 function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
-
-    let time: number = Date.now() - start;
 
     let transformedPolytope = mainPolytope.map((v: Vertex): Vertex => {
         let position = (math.flatten(math.multiply(rot, v.position)) as any).toArray();
