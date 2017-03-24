@@ -42,6 +42,20 @@ export class Vertex {
         res.position.push(z);
         return res;
     }
+
+    project(targetDimension: number, focalDistance: number): Vertex {
+        if (this.dimension <= targetDimension) {
+            return this;
+        } else {
+            let res: Vertex = new Vertex();
+            let z: number = this.position[this.dimension - 1];
+            for (let i: number = 0; i < this.dimension - 1; ++i) {
+                let x: number = focalDistance * this.position[i] / (focalDistance - z);
+                res.position.push(x);
+            }
+            return res.project(targetDimension, focalDistance);
+        }
+    }
 }
 
 export class Polytope {
