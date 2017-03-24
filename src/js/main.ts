@@ -11,14 +11,14 @@ function rotation(dimension, d1, d2: number, angle: number): mathjs.Matrix {
     return res;
 }
 
-let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1).extrude(1);
+let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1);
+let rot: mathjs.Matrix = math.eye(mainPolytope.dimension);
 
 let start: number = Date.now();
 function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
 
     let time: number = Date.now() - start;
-    let rot: mathjs.Matrix = rotation(mainPolytope.dimension, 2, 3, time / 1000);
 
     let transformedPolytope = mainPolytope.map((v: Vertex): Vertex => {
         let position = (math.flatten(math.multiply(rot, v.position)) as any).toArray();
@@ -32,6 +32,14 @@ function handleAnimationFrame() {
     render();
 }
 requestAnimationFrame(handleAnimationFrame);
+
+declare let Hammer: any;
+let hammertime = new Hammer(document.body, {});
+hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL});
+hammertime.on('pan', function(ev) {
+    rot = math.multiply(rotation(mainPolytope.dimension, 0, 2, -ev.velocityX / 10), rot);
+    rot = math.multiply(rotation(mainPolytope.dimension, 1, 2, ev.velocityY / 10), rot);
+});
 
 function requestFullScreen(element) {
     let method =
