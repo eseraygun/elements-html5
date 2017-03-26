@@ -136,7 +136,7 @@ button:focus {
     left: 5em;
     bottom: 5em;
     box-shadow: 0 0 1em gray;
-    /*border-radius: 1em;*/
+    background-color: white;
     padding: 1em;
 }
 
@@ -164,7 +164,7 @@ button:focus {
 .plane-selector div input[type=radio] + label {
     display: inline-block;
     border-radius: 0.5em;
-    padding: 1em 2em;
+    padding: 0.5em 1em;
     line-height: normal;
     color: black;
     text-align: center;
