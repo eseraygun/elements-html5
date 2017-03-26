@@ -98,6 +98,7 @@ textarea {
 .toolbar {
     position: absolute;
     padding: 1em;
+    width: 100%;
 }
 
 button:focus {
@@ -105,19 +106,93 @@ button:focus {
     border: 1px lightgray solid;
 }
 
-.round {
-    background: white;
+.round-button {
+    margin-right: 1em;
+    margin-top: 1em;
     box-shadow: 0 0 1em gray;
     border: 1px white solid;
     border-radius: 3em;
     width: 3em;
     height: 3em;
+    background-color: white;
+    background-position: center center;
+    background-size: cover;
+}
+
+.on {
+    background-color: lightblue;
+}
+
+.left {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+.plane-selector {
+    position: fixed;
+    left: 5em;
+    bottom: 5em;
+    box-shadow: 0 0 1em gray;
+    /*border-radius: 1em;*/
+    padding: 1em;
+}
+
+.plane-selector h2 {
+    margin: 0 0 1em;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.plane-selector div {
+    border: 1px solid lightblue;
+    border-radius: 0.5em;
+    line-height: 1em;
+    vertical-align: middle;
+}
+
+.plane-selector div + div {
+    margin-top: 1em;
+}
+
+.plane-selector div input[type=radio] {
+    display: none;
+}
+
+.plane-selector div input[type=radio] + label {
+    display: inline-block;
+    border-radius: 0.5em;
+    padding: 1em 2em;
+    line-height: normal;
+    color: black;
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.plane-selector div input[type=radio]:checked + label {
+    background: lightblue;
+    color: black;
+}
+
+#bottom-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
 }
 
 #full-screen {
     background-image: url("../img/full_screen.png");
-    background-position: center center;
-    background-size: cover;
+}
+
+#rotate-h {
+    background-image: url("../img/rotate_h.png");
+}
+
+#rotate-v {
+    background-image: url("../img/rotate_v.png");
 }
 
 /* ==========================================================================

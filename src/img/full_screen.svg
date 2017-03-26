@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="full_screen.svg">
+   sodipodi:docname="full_screen.svg"
+   inkscape:export-filename="/home/eser/Projects/ElementsWeb/elements/src/img/full_screen.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="94.378683"
+     inkscape:cx="34.200112"
      inkscape:cy="132.31358"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -49,7 +52,7 @@
        id="grid3336"
        empspacing="8" />
     <sodipodi:guide
-       position="56,192"
+       position="48,264"
        orientation="1,0"
        id="guide3338" />
     <sodipodi:guide
@@ -73,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -83,23 +86,23 @@
      id="layer1"
      transform="translate(0,-796.36216)">
     <path
-       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="m 56,844.36216 0,32 16,0 0,-16 16,0 0,-16 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 56,852.36216 0,32 16,0 0,-16 16,0 0,-16 z"
        id="path4148"
        inkscape:connector-curvature="0" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 208,844.36216 -32,0 0,16 16,0 0,16 16,0 z"
+       d="m 200,852.36216 -32,0 0,16 16,0 0,16 16,0 z"
        id="path4148-3"
        inkscape:connector-curvature="0" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 208,1004.3622 0,-32.00004 -16,0 0,16.00004 -16,0 0,16 z"
+       d="m 200,996.36216 0,-32.00004 -16,0 0,16.00004 -16,0 0,16 z"
        id="path4148-6"
        inkscape:connector-curvature="0" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 56,1004.3622 32,0 0,-16 -16,0 0,-16.00004 -16,0 z"
+       d="m 56,996.3622 32,0 0,-16.00004 -16,0 0,-16.00004 -16,0 z"
        id="path4148-3-7"
        inkscape:connector-curvature="0" />
   </g>

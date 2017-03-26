@@ -2,7 +2,11 @@
 import {Polytope, Vertex} from './polytope';
 import {render, updateIntersectionObject, updateTransformedObject} from "./rendering";
 
-function rotation(dimension, d1, d2: number, angle: number): mathjs.Matrix {
+function rotation(dimension, orientation: string, angle: number): mathjs.Matrix {
+    let plane = jQuery('#rotate-' + orientation + '-dialog').serializeObject();
+    let d1: number = parseInt(plane['axis-1']);
+    let d2: number = parseInt(plane['axis-2']);
+
     let res: mathjs.Matrix = math.eye(dimension);
     res.set([d1, d1], Math.cos(angle));
     res.set([d2, d2], Math.cos(angle));
@@ -11,14 +15,15 @@ function rotation(dimension, d1, d2: number, angle: number): mathjs.Matrix {
     return res;
 }
 
-let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1);
-let rot: mathjs.Matrix = math.eye(mainPolytope.dimension);
+let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1).extrude(1);
+let rot: any = math.eye(mainPolytope.dimension);
+let del: any = math.zeros(mainPolytope.dimension);
 
 function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
 
     let transformedPolytope = mainPolytope.map((v: Vertex): Vertex => {
-        let position = (math.flatten(math.multiply(rot, v.position)) as any).toArray();
+        let position = (math.flatten(math.add(math.multiply(rot, v.position), del) as any) as any).toArray();
         return new Vertex(position);
     });
     updateTransformedObject(transformedPolytope);
@@ -30,53 +35,37 @@ function handleAnimationFrame() {
 }
 requestAnimationFrame(handleAnimationFrame);
 
-declare let Hammer: any;
 let hammertime = new Hammer(document.body, {});
-hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL});
+hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL, pointers: 0});
 hammertime.on('pan', function(ev) {
-    rot = math.multiply(rotation(mainPolytope.dimension, 0, 2, -ev.velocityX / 10), rot);
-    rot = math.multiply(rotation(mainPolytope.dimension, 1, 2, ev.velocityY / 10), rot);
+    if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false) {
+        rot = math.multiply(rotation(mainPolytope.dimension, 'h', ev.velocityX / 10), rot);
+        rot = math.multiply(rotation(mainPolytope.dimension, 'v', ev.velocityY / 10), rot);
+    } else {
+        del.set([0], del.get([0]) + ev.velocityX / 10);
+        del.set([2], del.get([2]) + ev.velocityY / 10);
+    }
 });
 
-function requestFullScreen(element) {
-    let method =
-        element.requestFullscreen ||
-        element.webkitRequestFullscreen ||
-        element.mozRequestFullScreen ||
-        element.msRequestFullscreen;
-    if (method) {
-        method.call(element);
-    }
-}
+let dialogs = jQuery('.dialog');
+let dialogTriggers = jQuery('.dialog-trigger');
 
-function exitFullScreen() {
-    let method =
-        document.exitFullscreen ||
-        document.webkitExitFullscreen ||
-        document['mozCancelFullScreen'] ||
-        document['msExitFullscreen'];
-    if (method) {
-        method.call(document);
-    }
-}
+jQuery('#full-screen').click(function() {
+    jQuery(document.body).fullscreen().toggle();
+});
 
-function isFullScreen(): boolean {
-    let field =
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document['mozFullScreenElement'] ||
-        document['msFullScreenElement'];
-    if (field) {
-        return field;
-    } else {
-        return false;
+dialogTriggers.click(function() {
+    let relatedDialog = jQuery('#' + this.id + '-dialog');
+    let mustShow: boolean = relatedDialog.hasClass('hidden');
+    dialogs.addClass('hidden');
+    dialogTriggers.removeClass('on');
+    if (mustShow) {
+        relatedDialog.removeClass('hidden');
+        jQuery(this).addClass('on');
     }
-}
+    return false;
+});
 
-document.getElementById("full-screen").addEventListener("click", () => {
-    if (isFullScreen()) {
-        exitFullScreen();
-    } else {
-        requestFullScreen(document.body);
-    }
+jQuery('.plane-selector').change(function() {
+     jQuery(this).serializeObject();
 });

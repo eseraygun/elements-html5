@@ -20,12 +20,48 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="toolbar">
-            <button id="full-screen" class="round" title="Toggle full screen"></button>
+        <div id="bottom-bar" class="toolbar">
+            <button id="rotate-v" class="round-button left dialog-trigger" title="Vertical rotation plane"></button>
+            <button id="full-screen" class="round-button left clear" title="Toggle full screen"></button>
+            <button id="rotate-h" class="round-button left dialog-trigger" title="Horizontal rotation plane"></button>
         </div>
+
+        <form id="rotate-h-dialog" class="plane-selector dialog hidden">
+            <h2>Pick the horizontal rotation plane</h2>
+            <div>
+                <input type="radio" id="rotate-h-x-1" name="axis-1" value="0" /><label for="rotate-h-x-1"><span>x</span></label>
+                <input type="radio" id="rotate-h-y-1" name="axis-1" value="1" /><label for="rotate-h-y-1"><span>y</span></label>
+                <input type="radio" id="rotate-h-z-1" name="axis-1" value="2" checked="checked" /><label for="rotate-h-z-1"><span>z</span></label>
+                <input type="radio" id="rotate-h-t-1" name="axis-1" value="3" /><label for="rotate-h-t-1"><span>t</span></label>
+            </div>
+            <div>
+                <input type="radio" id="rotate-h-x-2" name="axis-2" value="0" checked="checked" /><label for="rotate-h-x-2"><span>x</span></label>
+                <input type="radio" id="rotate-h-y-2" name="axis-2" value="1" /><label for="rotate-h-y-2"><span>y</span></label>
+                <input type="radio" id="rotate-h-z-2" name="axis-2" value="2" /><label for="rotate-h-z-2"><span>z</span></label>
+                <input type="radio" id="rotate-h-t-2" name="axis-2" value="3" /><label for="rotate-h-t-2"><span>t</span></label>
+            </div>
+        </form>
+
+        <form id="rotate-v-dialog" class="plane-selector dialog hidden">
+            <h2>Pick the vertical rotation plane</h2>
+            <div>
+                <input type="radio" id="rotate-v-x-1" name="axis-1" value="0" /><label for="rotate-v-x-1"><span>x</span></label>
+                <input type="radio" id="rotate-v-y-1" name="axis-1" value="1" checked="checked" /><label for="rotate-v-y-1"><span>y</span></label>
+                <input type="radio" id="rotate-v-z-1" name="axis-1" value="2" /><label for="rotate-v-z-1"><span>z</span></label>
+                <input type="radio" id="rotate-v-t-1" name="axis-1" value="3" /><label for="rotate-v-t-1"><span>t</span></label>
+            </div>
+            <div>
+                <input type="radio" id="rotate-v-x-2" name="axis-2" value="0" /><label for="rotate-v-x-2"><span>x</span></label>
+                <input type="radio" id="rotate-v-y-2" name="axis-2" value="1" /><label for="rotate-v-y-2"><span>y</span></label>
+                <input type="radio" id="rotate-v-z-2" name="axis-2" value="2" checked="checked" /><label for="rotate-v-z-2"><span>z</span></label>
+                <input type="radio" id="rotate-v-t-2" name="axis-2" value="3" /><label for="rotate-v-t-2"><span>t</span></label>
+            </div>
+        </form>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/vendor/jquery-fullscreen-1.0.0.js"></script>
+        <script src="js/vendor/jquery.serializeObject-1.0.0.js"></script>
         <script src="js/vendor/math-3.10.0.min.js"></script>
         <script src="js/vendor/three-0.84.0.min.js"></script>
         <script src="js/vendor/hammer-2.0.8.min.js"></script>
