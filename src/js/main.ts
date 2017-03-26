@@ -15,9 +15,10 @@ function rotation(dimension, orientation: string, angle: number): mathjs.Matrix 
     return res;
 }
 
-let mainPolytope = Polytope.make_zero_dimensional_point().extrude(1).extrude(1).extrude(1).extrude(1);
+let mainPolytope = Polytope.makePointInZerothDimension().extrude(1).extrude(1).extrude(1).extrude(1);
 let rot: any = math.eye(mainPolytope.dimension);
 let del: any = math.zeros(mainPolytope.dimension);
+let startRot: any;
 
 function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
@@ -37,10 +38,15 @@ requestAnimationFrame(handleAnimationFrame);
 
 let hammertime = new Hammer(document.body, {});
 hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL, pointers: 0});
+hammertime.on('panstart', function(ev) {
+    startRot = rot;
+});
 hammertime.on('pan', function(ev) {
     if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false) {
-        rot = math.multiply(rotation(mainPolytope.dimension, 'h', ev.velocityX / 10), rot);
-        rot = math.multiply(rotation(mainPolytope.dimension, 'v', ev.velocityY / 10), rot);
+        rot = math.multiply(rotation(mainPolytope.dimension, 'h', Math.round(ev.deltaX / 10) * Math.PI / 36),
+                            startRot);
+        rot = math.multiply(rotation(mainPolytope.dimension, 'v', Math.round(ev.deltaY / 10) * Math.PI / 36),
+                            rot);
     } else {
         del.set([0], del.get([0]) + ev.velocityX / 10);
         del.set([2], del.get([2]) + ev.velocityY / 10);

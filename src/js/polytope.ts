@@ -67,7 +67,7 @@ export class Polytope {
         this.elements = elements;
     }
 
-    static make_zero_dimensional_point(): Polytope {
+    static makePointInZerothDimension(): Polytope {
         return new Polytope([Vertex.make_zero_dimensional()], []);
     }
 

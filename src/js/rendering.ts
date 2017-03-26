@@ -1,13 +1,15 @@
 /// <reference path="../../typings/index.d.ts" />
 import {Polytope, Vertex} from "./polytope";
 
-const focalDistance: number = 3.73;
+const fieldOfView: number = 25;
+const focalDistance: number = Math.tan(fieldOfView / Math.PI);
 
 function project(v: Vertex): THREE.Vector3 {
+    let u = v.project(2, focalDistance);
     let w = v.project(3, focalDistance);
     return new THREE.Vector3(
-        w.position[0] || 0,
-        w.position[1] || 0,
+        u.position[0] || 0,
+        u.position[1] || 0,
         w.position[2] || 0);
 }
 
@@ -33,18 +35,20 @@ let renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0xffffff, 1);
 
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+let radius: number = 2;
+let aspectRatio: number = window.innerWidth / window.innerHeight;
+let camera = new THREE.OrthographicCamera(-radius * aspectRatio, radius * aspectRatio, radius, -radius, 0.1, 10000);
 camera.position.z = 5;
 
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
+    //camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 }, false);
 
 let transformedObject = new THREE.LineSegments(undefined, new THREE.LineBasicMaterial({
     color: 0x000000,
-    linewidth: 2
+    linewidth: 1
 }));
 scene.add(transformedObject);
 
@@ -57,15 +61,21 @@ scene.add(intersectionObject);
 document.body.appendChild(renderer.domElement);
 
 export function updateTransformedObject(polytope: Polytope) {
-    transformedObject.geometry = makeGeometry(polytope);
-    transformedObject.geometry.verticesNeedUpdate = true;
-    transformedObject.geometry.lineDistancesNeedUpdate = true;
+    scene.remove(transformedObject);
+    transformedObject = new THREE.LineSegments(makeGeometry(polytope), new THREE.LineBasicMaterial({
+        color: 0x000000,
+        linewidth: 1
+    }));
+    scene.add(transformedObject);
 }
 
 export function updateIntersectionObject(polytope: Polytope) {
-    intersectionObject.geometry = makeGeometry(polytope);
-    intersectionObject.geometry.verticesNeedUpdate = true;
-    intersectionObject.geometry.lineDistancesNeedUpdate = true;
+    scene.remove(intersectionObject);
+    intersectionObject = new THREE.LineSegments(makeGeometry(polytope), new THREE.LineBasicMaterial({
+        color: 0xff0000,
+        linewidth: 4
+    }));
+    scene.add(intersectionObject);
 }
 
 export function render() {
