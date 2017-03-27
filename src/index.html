@@ -19,12 +19,26 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <div id="bottom-bar" class="toolbar">
-            <button id="rotate-v" class="round-button left dialog-trigger" title="Vertical rotation plane"></button>
-            <button id="full-screen" class="round-button left clear" title="Toggle full screen"></button>
-            <button id="rotate-h" class="round-button left dialog-trigger" title="Horizontal rotation plane"></button>
-        </div>
+        <button id="translate" class="round-button left dialog-trigger" title="Translation plane"></button>
+        <button id="rotate-v" class="round-button left dialog-trigger" title="Vertical rotation plane"></button>
+        <button id="rotate-h" class="round-button left dialog-trigger" title="Horizontal rotation plane"></button>
+        <button id="full-screen" class="round-button left clear" title="Toggle full screen"></button>
+
+        <form id="translate-dialog" class="plane-selector dialog hidden">
+            <h2>Translation plane</h2>
+            <div>
+                <input type="radio" id="translate-x-1" name="axis-1" value="0" checked="checked" /><label for="translate-x-1"><span>x</span></label>
+                <input type="radio" id="translate-y-1" name="axis-1" value="1" /><label for="translate-y-1"><span>y</span></label>
+                <input type="radio" id="translate-z-1" name="axis-1" value="2" /><label for="translate-z-1"><span>z</span></label>
+                <input type="radio" id="translate-t-1" name="axis-1" value="3" /><label for="translate-t-1"><span>t</span></label>
+            </div>
+            <div>
+                <input type="radio" id="translate-x-2" name="axis-2" value="0" /><label for="translate-x-2"><span>x</span></label>
+                <input type="radio" id="translate-y-2" name="axis-2" value="1" /><label for="translate-y-2"><span>y</span></label>
+                <input type="radio" id="translate-z-2" name="axis-2" value="2" checked="checked" /><label for="translate-z-2"><span>z</span></label>
+                <input type="radio" id="translate-t-2" name="axis-2" value="3" /><label for="translate-t-2"><span>t</span></label>
+            </div>
+        </form>
 
         <form id="rotate-h-dialog" class="plane-selector dialog hidden">
             <h2>Horizontal rotation plane</h2>

@@ -95,12 +95,6 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-.toolbar {
-    position: absolute;
-    padding: 1em;
-    width: 100%;
-}
-
 button:focus {
     outline: 0;
     border: 1px lightgray solid;
@@ -177,21 +171,31 @@ button:focus {
     color: black;
 }
 
-#bottom-bar {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-}
-
 #full-screen {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
     background-image: url("../img/full_screen.png");
 }
 
+#translate {
+    position: fixed;
+    left: 1em;
+    bottom: 1em;
+    background-image: url("../img/translate.png");
+}
+
 #rotate-h {
+    position: fixed;
+    left: 5em;
+    bottom: 1em;
     background-image: url("../img/rotate_h.png");
 }
 
 #rotate-v {
+    position: fixed;
+    left: 1em;
+    bottom: 5em;
     background-image: url("../img/rotate_v.png");
 }
 

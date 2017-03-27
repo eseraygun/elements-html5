@@ -1,8 +1,7 @@
 /// <reference path="../../typings/index.d.ts" />
 import {Polytope, Vertex} from "./polytope";
 
-const fieldOfView: number = 25;
-const focalDistance: number = Math.tan(fieldOfView / Math.PI);
+const focalDistance: number = 5;
 
 function project(v: Vertex): THREE.Vector3 {
     let u = v.project(2, focalDistance);
@@ -10,7 +9,7 @@ function project(v: Vertex): THREE.Vector3 {
     return new THREE.Vector3(
         u.position[0] || 0,
         u.position[1] || 0,
-        w.position[2] || 0);
+        u.position[2] || 0);
 }
 
 function makeGeometry(polytope: Polytope): THREE.Geometry {
@@ -35,14 +34,13 @@ let renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0xffffff, 1);
 
-let radius: number = 2;
+let radius: number = 4;
 let aspectRatio: number = window.innerWidth / window.innerHeight;
-let camera = new THREE.OrthographicCamera(-radius * aspectRatio, radius * aspectRatio, radius, -radius, 0.1, 10000);
-camera.position.z = 5;
+let camera = new THREE.OrthographicCamera(-radius * aspectRatio, radius * aspectRatio, radius, -radius, 0.1, 1000);
+camera.position.z = 1;
 
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
-    //camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 }, false);
 
