@@ -27,9 +27,11 @@ function rotation(dimension: number, orientation: string, angle: number): mathjs
 }
 
 let mainPolytope = Polytope.makePointInZerothDimension().extrude(1).extrude(1).extrude(1).extrude(1);
-let rot: any = math.eye(mainPolytope.dimension);
 let del: any = math.zeros([mainPolytope.dimension]);
+let rot: any = math.eye(mainPolytope.dimension);
+let startDel: any;
 let startRot: any;
+let panningMode: string;
 
 function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
@@ -51,16 +53,20 @@ let hammertime = new Hammer(document.body, {});
 hammertime.get('pan').set({direction: Hammer.DIRECTION_ALL, pointers: 0});
 hammertime.on('panstart', function() {
     startRot = rot;
+    startDel = del;
+    panningMode = 'rotation';
 });
 hammertime.on('pan', function(ev) {
     let dimension = mainPolytope.dimension;
-    if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false) {
-        rot = math.multiply(rotation(dimension, 'h', -Math.round(ev.deltaX / 10) * Math.PI / 36),
+    if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false && panningMode == 'rotation') {
+        rot = math.multiply(rotation(dimension, 'h', Math.round(ev.deltaX / 10) * Math.PI / 36),
                             startRot);
-        rot = math.multiply(rotation(dimension, 'v', -Math.round(ev.deltaY / 10) * Math.PI / 36),
+        rot = math.multiply(rotation(dimension, 'v', Math.round(ev.deltaY / 10) * Math.PI / 36),
                             rot);
     } else {
-        del = math.add(del, translation(dimension, ev.velocityX / 10, ev.velocityY / 10));
+        del = math.add(translation(dimension, Math.round(ev.deltaX / 10) * 0.1, Math.round(ev.deltaY / 10) * 0.1),
+                       startDel);
+        panningMode = 'translation';
     }
 });
 

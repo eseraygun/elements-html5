@@ -41,6 +41,11 @@ camera.position.z = 1;
 
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
+    aspectRatio = window.innerWidth / window.innerHeight;
+    camera.left = -radius * aspectRatio;
+    camera.right = radius * aspectRatio;
+    camera.top = radius;
+    camera.bottom = -radius;
     camera.updateProjectionMatrix();
 }, false);
 
