@@ -10,7 +10,7 @@ dimensional screen surface using perspective projection to make them visible to 
 The tool also computes the intersection of the object and the hyperplane parallel to the screen. The intersection is
 shown in red and it makes even easier to comprehend the real structure of the object.
 
-## Building
+## Build
 
 To build the web site under `dist` folder, install all the required packages with `npm install` and run `gulp`.
 
