@@ -3,13 +3,14 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Eser Aygün -- Developer -- @eseraygun
 
 # THANKS
 
-    <name>
+    Işık Barış Fidaner -- @BarisFidaner
 
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    Apache Server Configs, Normalize.css, Hammer, jQuery, Math, Modernizr, Three
+
