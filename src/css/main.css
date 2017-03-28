@@ -95,6 +95,12 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+header {
+    position: fixed;
+    left: 1em;
+    top: 1em;
+}
+
 button:focus {
     outline: 0;
     border: 1px lightgray solid;
@@ -169,6 +175,12 @@ button:focus {
 .plane-selector div input[type=radio]:checked + label {
     background: lightblue;
     color: black;
+}
+
+#title {
+    position: fixed;
+    margin: 0;
+    font-family: monospace;
 }
 
 #full-screen {
