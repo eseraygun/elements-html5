@@ -88,3 +88,7 @@ dialogTriggers.click(function() {
     }
     return false;
 });
+
+jQuery('#about').click(function() {
+    window.location.href = 'https://github.com/eseraygun/elements-html5/';
+});

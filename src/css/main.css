@@ -95,17 +95,6 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-header {
-    position: fixed;
-    left: 1em;
-    top: 1em;
-}
-
-header h1 {
-    margin: 0;
-    font-family: monospace;
-}
-
 button:focus {
     outline: 0;
     border: 1px lightgray solid;
@@ -128,21 +117,16 @@ button:focus {
     background-color: lightblue;
 }
 
-.left {
-    float: left;
-}
-
-.clear {
-    clear: both;
+.dialog {
+    box-shadow: 0 0 1em gray;
+    background-color: white;
+    padding: 1em;
 }
 
 .plane-selector {
     position: fixed;
     left: 5em;
     bottom: 5em;
-    box-shadow: 0 0 1em gray;
-    background-color: white;
-    padding: 1em;
 }
 
 .plane-selector h2 {
@@ -182,13 +166,6 @@ button:focus {
     color: black;
 }
 
-#full-screen {
-    position: fixed;
-    right: 1em;
-    bottom: 1em;
-    background-image: url("../img/full_screen.png");
-}
-
 #translate {
     position: fixed;
     left: 1em;
@@ -208,6 +185,25 @@ button:focus {
     left: 1em;
     bottom: 5em;
     background-image: url("../img/rotate_v.png");
+}
+
+#about {
+    position: fixed;
+    right: 5em;
+    bottom: 1em;
+}
+
+#about span {
+    font-size: 1.5em;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+#full-screen {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    background-image: url("../img/full_screen.png");
 }
 
 /* ==========================================================================

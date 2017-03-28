@@ -16,12 +16,35 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header><h1 id="title">Elements</h1></header>
+        <button id="translate" class="round-button dialog-trigger" title="Translation plane"></button>
+        <button id="rotate-v" class="round-button dialog-trigger" title="Vertical rotation plane"></button>
+        <button id="rotate-h" class="round-button dialog-trigger" title="Horizontal rotation plane"></button>
+        <button id="about" class="round-button dialog-trigger" title="About"><span>?</span></button>
+        <button id="full-screen" class="round-button" title="Toggle full screen"></button>
 
-        <button id="translate" class="round-button left dialog-trigger" title="Translation plane"></button>
-        <button id="rotate-v" class="round-button left dialog-trigger" title="Vertical rotation plane"></button>
-        <button id="rotate-h" class="round-button left dialog-trigger" title="Horizontal rotation plane"></button>
-        <button id="full-screen" class="round-button left clear" title="Toggle full screen"></button>
+        <div class="hidden">
+            <h1>Elements</h1>
+            <p>Elements is an in-browser tool for visualizing multidimensional objects and their intersections.
+                See it in <a href="https://github.com/eseraygun/elements-html5/">Github</a>!</p>
+            <p>Multidimensional objects are represented as polytopes where each element is bounded by lower-dimensional
+                elements (edges by vertices, faces by edges, etc.). The tool projects any object to two dimensional
+                screen surface using perspective projection to make them visible to the human eye.</p>
+            <p>The tool also computes the intersection of the object and the hyperplane parallel to the screen. The
+                intersection is shown in red and it makes even easier to comprehend the real structure of the
+                object.</p>
+
+            <h2>History</h2>
+            <p>Elements was originally written in Delphi by <a href="http://eseraygun.com/">Eser Aygün</a> and
+                <a href="https://yersizseyler.wordpress.com/">Işık Barış Fidaner</a> as a high school project
+                in 2000. The project won the second place in a national project contest.</p>
+            <p>The original report in Turkish and the original executable can be found
+                <a href="https://yersizseyler.wordpress.com/2016/05/13/cok-boyutlu-cisimlerin-izdusumlerinin-ve-arakesitlerinin-alinmasi/">here</a>.</p>
+
+            <h2>Future Work</h2>
+            <p>Currently, the tool only shows a four dimensional hypercube even though the code supports arbitrary
+                polytopes. Other interesting objects such as three/four dimensional torus, cone and sphere will be added
+                in the future.</p>
+        </div>
 
         <form id="translate-dialog" class="plane-selector dialog hidden">
             <h2>Translation plane</h2>
