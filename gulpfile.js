@@ -65,7 +65,8 @@ var bundle = function () {
         .pipe(gulp.dest("dist/js"));
 };
 
-gulp.task("default", ["copy-html", "copy-css", "copy-js", "copy-img", "copy-txt", "copy-ico", "copy-cfg"], bundle);
+gulp.task("build", ["copy-html", "copy-css", "copy-js", "copy-img", "copy-txt", "copy-ico", "copy-cfg"]);
+gulp.task("default", ["build"], bundle);
 
 watchedBrowserify.on("update", bundle);
 watchedBrowserify.on("log", gutil.log);
