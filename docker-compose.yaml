@@ -1,6 +1,0 @@
-version: "3"
-services:
-  elements:
-    image: gcr.io/eseraygun-com/elements
-    ports:
-      - 8000:80
