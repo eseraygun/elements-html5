@@ -1,11 +1,11 @@
-/// <reference path="../../typings/index.d.ts" />
+import * as THREE from "three";
+
 import {Polytope, Vertex} from "./polytope";
 
 const focalDistance: number = 5;
 
 function project(v: Vertex): THREE.Vector3 {
     let u = v.project(2, focalDistance);
-    let w = v.project(3, focalDistance);
     return new THREE.Vector3(
         u.position[0] || 0,
         u.position[1] || 0,

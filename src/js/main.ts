@@ -1,13 +1,21 @@
-/// <reference path="../../typings/index.d.ts" />
+import * as Hammer from "hammerjs";
+import * as jQuery from "jquery";
+import * as mathjs from "mathjs";
+
+import * as jQuery_fullscreen from "./jquery_fullscreen";
+import * as jQuery_serializeobject from "./jquery_serializeobject";
 import {Polytope, Vertex} from './polytope';
 import {render, updateIntersectionObject, updateTransformedObject} from "./rendering";
+
+jQuery_fullscreen.install(jQuery)
+jQuery_serializeobject.install(jQuery)
 
 function translation(dimension: number, h: number, v: number): mathjs.Matrix {
     let plane = jQuery('#translate-dialog').serializeObject();
     let d1: number = parseInt(plane['axis-1']);
     let d2: number = parseInt(plane['axis-2']);
 
-    let res: any = math.zeros([dimension]);
+    let res: any = mathjs.zeros([dimension]);
     res[d1] = h;
     res[d2] = v;
     return res;
@@ -18,17 +26,17 @@ function rotation(dimension: number, orientation: string, angle: number): mathjs
     let d1: number = parseInt(plane['axis-1']);
     let d2: number = parseInt(plane['axis-2']);
 
-    let res: mathjs.Matrix = math.eye(dimension);
-    res.set([d1, d1], Math.cos(angle));
-    res.set([d2, d2], Math.cos(angle));
-    res.set([d1, d2], -Math.sin(angle));
-    res.set([d2, d1], Math.sin(angle));
+    let res: mathjs.Matrix = mathjs.eye(dimension);
+    res.set([d1, d1], mathjs.cos(angle));
+    res.set([d2, d2], mathjs.cos(angle));
+    res.set([d1, d2], -mathjs.sin(angle));
+    res.set([d2, d1], mathjs.sin(angle));
     return res;
 }
 
 let mainPolytope = Polytope.makePointInZerothDimension().extrude(1).extrude(1).extrude(1).extrude(1);
-let del: any = math.zeros([mainPolytope.dimension]);
-let rot: any = math.eye(mainPolytope.dimension);
+let del: any = mathjs.zeros([mainPolytope.dimension]);
+let rot: any = mathjs.eye(mainPolytope.dimension);
 let startDel: any;
 let startRot: any;
 let panningMode: string;
@@ -37,7 +45,7 @@ function handleAnimationFrame() {
     requestAnimationFrame(handleAnimationFrame);
 
     let transformedPolytope = mainPolytope.map((v: Vertex): Vertex => {
-        let position = (math.flatten(math.add(math.multiply(rot, v.position), del) as any) as any).toArray();
+        let position = (mathjs.flatten(mathjs.add(mathjs.multiply(rot, v.position), del) as any) as any).toArray();
         return new Vertex(position);
     });
     updateTransformedObject(transformedPolytope);
@@ -59,12 +67,12 @@ hammertime.on('panstart', function() {
 hammertime.on('pan', function(ev) {
     let dimension = mainPolytope.dimension;
     if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false && panningMode == 'rotation') {
-        rot = math.multiply(rotation(dimension, 'h', Math.round(ev.deltaX / 10) * Math.PI / 36),
+        rot = mathjs.multiply(rotation(dimension, 'h', mathjs.round(ev.deltaX / 10) * mathjs.PI / 36),
                             startRot);
-        rot = math.multiply(rotation(dimension, 'v', Math.round(ev.deltaY / 10) * Math.PI / 36),
+        rot = mathjs.multiply(rotation(dimension, 'v', mathjs.round(ev.deltaY / 10) * mathjs.PI / 36),
                             rot);
     } else {
-        del = math.add(translation(dimension, Math.round(ev.deltaX / 10) * 0.1, Math.round(ev.deltaY / 10) * 0.1),
+        del = mathjs.add(translation(dimension, mathjs.round(ev.deltaX / 10) * 0.1, mathjs.round(ev.deltaY / 10) * 0.1),
                        startDel);
         panningMode = 'translation';
     }
