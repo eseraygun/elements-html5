@@ -24,7 +24,7 @@
   "homepage": "https://github.com/eseraygun/elements-html5#readme",
   "devDependencies": {
     "browserify": "^14.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-typescript": "^3.1.6",
     "tsify": "^3.0.1",
     "typescript": "^2.2.1",
