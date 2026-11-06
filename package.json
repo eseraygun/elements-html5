@@ -7,6 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
+    "build": "rm -rf dist && esbuild src/js/main.ts --bundle --minify --target=es2020 --outfile=dist/js/bundle.js && esbuild src/css/*.css src/js/plugins.js --minify --outbase=src --outdir=dist && mkdir -p dist/img && cp -R src/js/vendor dist/js/ && cp src/img/*.png dist/img/ && cp src/index.html src/404.html src/favicon.ico src/humans.txt src/robots.txt src/crossdomain.xml src/.htaccess dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,18 +23,13 @@
     "url": "https://github.com/eseraygun/elements-html5/issues"
   },
   "homepage": "https://github.com/eseraygun/elements-html5#readme",
-  "devDependencies": {
-    "browserify": "^14.1.0",
-    "gulp": "^3.9.1",
-    "gulp-typescript": "^3.1.6",
-    "tsify": "^3.0.1",
-    "typescript": "^2.2.1",
-    "vinyl-source-stream": "^1.1.0"
-  },
   "dependencies": {
-    "hammerjs": "2.0.8",
-    "jquery": "1.12.0",
-    "mathjs": "3.10.0",
-    "three": "0.84.0"
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.7.1",
+    "mathjs": "^15.2.0",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }

@@ -12,7 +12,7 @@ shown in red and it makes even easier to comprehend the real structure of the ob
 
 ## Build
 
-To build the web site under `dist` folder, install all the required packages with `npm install` and run `gulp`.
+To build the web site under `dist` folder, install all the required packages with `npm install` and run `npm run build`.
 
 ## History
 

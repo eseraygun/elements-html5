@@ -1,5 +1,5 @@
-import * as Hammer from "hammerjs";
-import * as jQuery from "jquery";
+import Hammer from "hammerjs";
+import jQuery from "jquery";
 import * as mathjs from "mathjs";
 
 import * as jQuery_fullscreen from "./jquery_fullscreen";
@@ -26,7 +26,7 @@ function rotation(dimension: number, orientation: string, angle: number): mathjs
     let d1: number = parseInt(plane['axis-1']);
     let d2: number = parseInt(plane['axis-2']);
 
-    let res: mathjs.Matrix = mathjs.eye(dimension);
+    let res: mathjs.Matrix = mathjs.identity(dimension);
     res.set([d1, d1], mathjs.cos(angle));
     res.set([d2, d2], mathjs.cos(angle));
     res.set([d1, d2], -mathjs.sin(angle));
@@ -36,7 +36,7 @@ function rotation(dimension: number, orientation: string, angle: number): mathjs
 
 let mainPolytope = Polytope.makePointInZerothDimension().extrude(1).extrude(1).extrude(1).extrude(1);
 let del: any = mathjs.zeros([mainPolytope.dimension]);
-let rot: any = mathjs.eye(mainPolytope.dimension);
+let rot: any = mathjs.identity(mainPolytope.dimension);
 let startDel: any;
 let startRot: any;
 let panningMode: string;
@@ -67,9 +67,9 @@ hammertime.on('panstart', function() {
 hammertime.on('pan', function(ev) {
     let dimension = mainPolytope.dimension;
     if (ev.pointers.length == 1 && ev.pointers[0].shiftKey == false && panningMode == 'rotation') {
-        rot = mathjs.multiply(rotation(dimension, 'h', mathjs.round(ev.deltaX / 10) * mathjs.PI / 36),
+        rot = mathjs.multiply(rotation(dimension, 'h', mathjs.round(ev.deltaX / 10) * mathjs.pi / 36),
                             startRot);
-        rot = mathjs.multiply(rotation(dimension, 'v', mathjs.round(ev.deltaY / 10) * mathjs.PI / 36),
+        rot = mathjs.multiply(rotation(dimension, 'v', mathjs.round(ev.deltaY / 10) * mathjs.pi / 36),
                             rot);
     } else {
         del = mathjs.add(translation(dimension, mathjs.round(ev.deltaX / 10) * 0.1, mathjs.round(ev.deltaY / 10) * 0.1),

@@ -12,20 +12,24 @@ function project(v: Vertex): THREE.Vector3 {
         u.position[2] || 0);
 }
 
-function makeGeometry(polytope: Polytope): THREE.Geometry {
-    if (polytope.dimension == 0) {
-        return undefined;
+function makeGeometry(polytope: Polytope): THREE.BufferGeometry {
+    let points: THREE.Vector3[] = [];
+    if (polytope.dimension != 0) {
+        polytope.elements[0].forEach((e: number[]) => {
+            points.push(
+                project(polytope.vertices[e[0]]),
+                project(polytope.vertices[e[1]])
+            );
+        });
     }
 
-    let res = new THREE.Geometry();
-    polytope.elements[0].forEach((e: number[]) => {
-        res.vertices.push(
-            project(polytope.vertices[e[0]]),
-            project(polytope.vertices[e[1]])
-        );
-    });
+    return new THREE.BufferGeometry().setFromPoints(points);
+}
 
-    return res;
+function dispose(object: THREE.LineSegments) {
+    scene.remove(object);
+    object.geometry.dispose();
+    (object.material as THREE.Material).dispose();
 }
 
 let scene = new THREE.Scene();
@@ -64,7 +68,7 @@ scene.add(intersectionObject);
 document.body.appendChild(renderer.domElement);
 
 export function updateTransformedObject(polytope: Polytope) {
-    scene.remove(transformedObject);
+    dispose(transformedObject);
     transformedObject = new THREE.LineSegments(makeGeometry(polytope), new THREE.LineBasicMaterial({
         color: 0x000000,
         linewidth: 1
@@ -73,7 +77,7 @@ export function updateTransformedObject(polytope: Polytope) {
 }
 
 export function updateIntersectionObject(polytope: Polytope) {
-    scene.remove(intersectionObject);
+    dispose(intersectionObject);
     intersectionObject = new THREE.LineSegments(makeGeometry(polytope), new THREE.LineBasicMaterial({
         color: 0xff0000,
         linewidth: 4
